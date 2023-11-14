@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:roller_dice/gradient_container.dart';
 
 class RollediceApp extends StatelessWidget {
   const RollediceApp({super.key});
@@ -12,11 +13,7 @@ class RollediceApp extends StatelessWidget {
           title: const Text('Roller Dice...'),
           centerTitle: true,
         ),
-        body: Container(
-          decoration: BoxDecoration(
-            
-          ),
-        ),
+        body: const GradientContainer(),
       ),
     );
   }
