@@ -11,11 +11,12 @@ class GradientContainer extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
           gradient: LinearGradient(
-        colors: [Colors.blue, Colors.redAccent],
+        colors: [Color.fromARGB(255, 0, 122, 221), Color.fromARGB(255, 0, 253, 0)],
         begin: beginAlignment,
         end: endAlignment,
       )),
-      child: const Center(child: RollerDice()),
+      child:const RollerDice(),
+      
     );
   }
 }
