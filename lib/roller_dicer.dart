@@ -39,14 +39,42 @@ class _RollerDiceState extends State<RollerDice>
       }
     });
 
+    if (isToggleButtonEnabled) {
+      if (selectedOption == "MAX") {
+        if (diceNum == 4 || diceNum == 5 || diceNum == 6) {
+          if (currentPlayer == 1) {
+            player1Score += 10;
+          } else {
+            player2Score += 10;
+          }
+        } else {
+          if (currentPlayer == 1) {
+            player1Score -= 10;
+          } else {
+            player2Score -= 10;
+          }
+        }
+        print('MAX');
+      } else {
+        if (diceNum == 1 || diceNum == 2 || diceNum == 3) {
+          if (currentPlayer == 1) {
+            player1Score += 10;
+          } else {
+            player2Score += 10;
+          }
+          print('MIN');
+        } else {
+          if (currentPlayer == 1) {
+            player1Score -= 10;
+          } else {
+            player2Score -= 10;
+          }
+        }
+      }
+    }
+
     _controller.reset();
     _controller.forward();
-
-    if (currentPlayer == 1) {
-      player1Score += diceNum;
-    } else {
-      player2Score += diceNum;
-    }
 
     currentPlayer = (currentPlayer == 1) ? 2 : 1;
     if (currentRound == 5) {
@@ -89,22 +117,18 @@ class _RollerDiceState extends State<RollerDice>
 
   @override
   Widget build(BuildContext context) {
+    String selectedOption = 'Option 1';
+    bool isToggleButtonEnabled = false;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-getResetButton(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [getScoreCard()],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(height: 50.0),
-            getDice(),
-          ],
-        ),
+        getResetButton(),
+        getScoreCard(),
+        SizedBox(height: 100.0),
+        getDice(),
+        SizedBox(height: 100.0),
+        getOptions(),
         SizedBox(height: 50.0),
         getButton()
       ],
@@ -125,8 +149,7 @@ getResetButton(),
 
   Widget getButton() {
     return Container(
-           
-  alignment: Alignment.bottomCenter,
+      alignment: Alignment.bottomCenter,
       child: TextButton(
           onPressed: roll,
           style: TextButton.styleFrom(
@@ -170,6 +193,14 @@ getResetButton(),
                 fontWeight: FontWeight.bold,
               ),
             ),
+            Text(
+              'Round 5/$currentRound',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             SizedBox(height: 10.0),
             Text(
               'Player 1 Score: $player1Score',
@@ -182,6 +213,46 @@ getResetButton(),
           ],
         ),
       ),
+    );
+  }
+
+  String selectedOption = 'MAX';
+  bool isToggleButtonEnabled = false;
+  Widget getOptions() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Row(
+          children: [
+            Radio(
+              value: 'MAX',
+              groupValue: selectedOption,
+              onChanged: (value) {
+                setState(() {
+                  selectedOption = value.toString();
+                  isToggleButtonEnabled = true;
+                });
+              },
+            ),
+            Text('MAX'),
+          ],
+        ),
+        Row(
+          children: [
+            Radio(
+              value: 'MIN',
+              groupValue: selectedOption,
+              onChanged: (value) {
+                setState(() {
+                  selectedOption = value.toString();
+                  isToggleButtonEnabled = true;
+                });
+              },
+            ),
+            Text('MIN'),
+          ],
+        ),
+      ],
     );
   }
 }
