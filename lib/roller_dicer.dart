@@ -137,7 +137,10 @@ class _RollerDiceState extends State<RollerDice>
           style: TextButton.styleFrom(
               backgroundColor: const Color.fromARGB(255, 243, 33, 33),
               foregroundColor: Colors.white,
-              textStyle: const TextStyle(fontSize: 30)),
+              textStyle: const TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              )),
           child: const Text('Role Once')),
     );
   }
@@ -156,26 +159,28 @@ class _RollerDiceState extends State<RollerDice>
   }
 
   Widget getScoreCard() {
-    return Container(
-      color: Color.fromARGB(255, 0, 0, 0),
-      width: 450,
-      height: 250,
+    return Card(
+      elevation: 4.0, // Adds a shadow to the card
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      color: const Color.fromARGB(255, 0, 0, 0),
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            SizedBox(height: 40.0),
+            const SizedBox(height: 40.0),
             Text(
-              'Player $currentPlayer',
+              'Player | 0$currentPlayer',
               style: const TextStyle(
                 color: Color.fromRGBO(255, 255, 255, 1),
                 fontSize: 60.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             Text(
-              'Round 5/$currentRound',
+              'Round - 5 / $currentRound',
               style: const TextStyle(
                 color: Color.fromARGB(255, 197, 0, 0),
                 fontSize: 20.0,
@@ -186,21 +191,22 @@ class _RollerDiceState extends State<RollerDice>
             Row(
               children: [
                 Text(
-                  'Player 1 Score: $player1Score',
+                  'Player 01 Score :- $player1Score',
                   style: const TextStyle(
-                    fontSize: 18.0,
-                    color: Colors.white,
-                  ),
+                      fontSize: 18.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
                 ),
               ],
             ),
             Row(
               children: [
                 Text(
-                  'Player 2 Score: $player2Score',
+                  'Player 02 Score :- $player2Score',
                   style: const TextStyle(
                     fontSize: 18.0,
                     color: Colors.white,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
@@ -228,7 +234,8 @@ class _RollerDiceState extends State<RollerDice>
             });
           },
         ),
-        const Text('MAX', style: TextStyle(color: Colors.white, fontSize: 30)),
+        const Text('MAX ? ',
+            style: TextStyle(color: Colors.white, fontSize: 25)),
         Radio(
           activeColor: Colors.red,
           value: 'MIN',
@@ -240,7 +247,8 @@ class _RollerDiceState extends State<RollerDice>
             });
           },
         ),
-        const Text('MIN', style: TextStyle(color: Colors.white, fontSize: 30)),
+        const Text('MIN ?',
+            style: TextStyle(color: Colors.white, fontSize: 25)),
       ],
     );
   }
