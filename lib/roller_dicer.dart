@@ -38,38 +38,23 @@ class _RollerDiceState extends State<RollerDice>
         diceNum = Random().nextInt(6) + 1;
       }
     });
-
-    if (isToggleButtonEnabled) {
-      if (selectedOption == "MAX") {
-        if (diceNum == 4 || diceNum == 5 || diceNum == 6) {
-          if (currentPlayer == 1) {
-            player1Score += 10;
-          } else {
-            player2Score += 10;
-          }
+    if (selectedOption == "MAX") {
+      if (diceNum == 4 || diceNum == 5 || diceNum == 6) {
+        if (currentPlayer == 1) {
+          player1Score += 10;
         } else {
-          if (currentPlayer == 1) {
-            player1Score -= 10;
-          } else {
-            player2Score -= 10;
-          }
+          player2Score += 10;
         }
-        print('MAX');
-      } else {
-        if (diceNum == 1 || diceNum == 2 || diceNum == 3) {
-          if (currentPlayer == 1) {
-            player1Score += 10;
-          } else {
-            player2Score += 10;
-          }
-          print('MIN');
+      }
+      print('MAX');
+    } else {
+      if (diceNum == 1 || diceNum == 2 || diceNum == 3) {
+        if (currentPlayer == 1) {
+          player1Score += 10;
         } else {
-          if (currentPlayer == 1) {
-            player1Score -= 10;
-          } else {
-            player2Score -= 10;
-          }
+          player2Score += 10;
         }
+        print('MIN');
       }
     }
 
@@ -83,7 +68,7 @@ class _RollerDiceState extends State<RollerDice>
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Game Over'),
+            title: Text('Game Over !'),
             content: Text('Player $winner wins!'),
             actions: [
               TextButton(
@@ -117,27 +102,24 @@ class _RollerDiceState extends State<RollerDice>
 
   @override
   Widget build(BuildContext context) {
-    String selectedOption = 'Option 1';
-    bool isToggleButtonEnabled = false;
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        getResetButton(),
         getScoreCard(),
-        SizedBox(height: 100.0),
+        const SizedBox(height: 50.0),
         getDice(),
-        SizedBox(height: 100.0),
+        const SizedBox(height: 50.0),
         getOptions(),
-        SizedBox(height: 50.0),
-        getButton()
+        getButton(),
+        const SizedBox(height: 10.0),
       ],
     );
   }
 
   Widget getResetButton() {
     return Container(
-      alignment: Alignment.topCenter,
+      alignment: Alignment.topLeft,
       child: IconButton(
         onPressed: resetGame,
         icon: Icon(Icons.refresh),
@@ -153,9 +135,9 @@ class _RollerDiceState extends State<RollerDice>
       child: TextButton(
           onPressed: roll,
           style: TextButton.styleFrom(
-              backgroundColor: Colors.blue,
+              backgroundColor: const Color.fromARGB(255, 243, 33, 33),
               foregroundColor: Colors.white,
-              textStyle: const TextStyle(fontSize: 28)),
+              textStyle: const TextStyle(fontSize: 30)),
           child: const Text('Role Once')),
     );
   }
@@ -167,48 +149,61 @@ class _RollerDiceState extends State<RollerDice>
         scale: _scaleAnimation,
         child: Image.asset(
           'assets/images/dice-$diceNum.png',
-          width: 130,
+          width: 200,
         ),
       ),
     );
   }
 
   Widget getScoreCard() {
-    return Card(
-      color: Colors.green[400],
-      elevation: 4.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.0),
-      ),
+    return Container(
+      color: Color.fromARGB(255, 0, 0, 0),
+      width: 450,
+      height: 250,
       child: Padding(
-        padding: const EdgeInsets.all(26.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           children: [
+            SizedBox(height: 40.0),
             Text(
               'Player $currentPlayer',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 30.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              'Round 5/$currentRound',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20.0,
+              style: const TextStyle(
+                color: Color.fromRGBO(255, 255, 255, 1),
+                fontSize: 60.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(height: 10.0),
             Text(
-              'Player 1 Score: $player1Score',
-              style: TextStyle(fontSize: 16.0),
+              'Round 5/$currentRound',
+              style: const TextStyle(
+                color: Color.fromARGB(255, 197, 0, 0),
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            Text(
-              'Player 2 Score: $player2Score',
-              style: TextStyle(fontSize: 16.0),
+            const SizedBox(height: 20.0),
+            Row(
+              children: [
+                Text(
+                  'Player 1 Score: $player1Score',
+                  style: const TextStyle(
+                    fontSize: 18.0,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Text(
+                  'Player 2 Score: $player2Score',
+                  style: const TextStyle(
+                    fontSize: 18.0,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -219,39 +214,33 @@ class _RollerDiceState extends State<RollerDice>
   String selectedOption = 'MAX';
   bool isToggleButtonEnabled = false;
   Widget getOptions() {
-    return Column(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Row(
-          children: [
-            Radio(
-              value: 'MAX',
-              groupValue: selectedOption,
-              onChanged: (value) {
-                setState(() {
-                  selectedOption = value.toString();
-                  isToggleButtonEnabled = true;
-                });
-              },
-            ),
-            Text('MAX'),
-          ],
+        Radio(
+          activeColor: Colors.red,
+          value: 'MAX',
+          groupValue: selectedOption,
+          onChanged: (value) {
+            setState(() {
+              selectedOption = value.toString();
+              isToggleButtonEnabled = true;
+            });
+          },
         ),
-        Row(
-          children: [
-            Radio(
-              value: 'MIN',
-              groupValue: selectedOption,
-              onChanged: (value) {
-                setState(() {
-                  selectedOption = value.toString();
-                  isToggleButtonEnabled = true;
-                });
-              },
-            ),
-            Text('MIN'),
-          ],
+        const Text('MAX', style: TextStyle(color: Colors.white, fontSize: 30)),
+        Radio(
+          activeColor: Colors.red,
+          value: 'MIN',
+          groupValue: selectedOption,
+          onChanged: (value) {
+            setState(() {
+              selectedOption = value.toString();
+              isToggleButtonEnabled = true;
+            });
+          },
         ),
+        const Text('MIN', style: TextStyle(color: Colors.white, fontSize: 30)),
       ],
     );
   }
