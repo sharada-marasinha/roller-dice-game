@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:roller_dice/constants.dart';
 
 class RollerDice extends StatefulWidget {
   const RollerDice({Key? key}) : super(key: key);
@@ -139,7 +140,7 @@ class _RollerDiceState extends State<RollerDice>
         onPressed: resetGame,
         icon: Icon(Icons.refresh),
         iconSize: 36.0,
-        color: const Color.fromARGB(255, 0, 0, 0),
+        color: kThemeColorBlack,
       ),
     );
   }
@@ -150,8 +151,8 @@ class _RollerDiceState extends State<RollerDice>
       child: TextButton(
           onPressed: roll,
           style: TextButton.styleFrom(
-              backgroundColor: const Color.fromARGB(255, 243, 33, 33),
-              foregroundColor: Colors.white,
+              backgroundColor: kThemeColorRed,
+              foregroundColor: kThemeColorWhite,
               textStyle: const TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
@@ -179,7 +180,7 @@ class _RollerDiceState extends State<RollerDice>
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
-      color: const Color.fromARGB(255, 0, 0, 0),
+      color: kThemeColorBlack,
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -188,7 +189,7 @@ class _RollerDiceState extends State<RollerDice>
             Text(
               'Player | 0$currentPlayer',
               style: const TextStyle(
-                color: Color.fromRGBO(255, 255, 255, 1),
+                color: kThemeColorWhite,
                 fontSize: 60.0,
                 fontWeight: FontWeight.bold,
               ),
@@ -197,7 +198,7 @@ class _RollerDiceState extends State<RollerDice>
             Text(
               'Round - 5 / $currentRound',
               style: const TextStyle(
-                color: Color.fromARGB(255, 197, 0, 0),
+                color: kThemeColorRed,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold,
               ),
@@ -209,7 +210,7 @@ class _RollerDiceState extends State<RollerDice>
                   'Player 01 Score :- $player1Score',
                   style: const TextStyle(
                       fontSize: 18.0,
-                      color: Colors.white,
+                      color: kThemeColorWhite,
                       fontWeight: FontWeight.bold),
                 ),
               ],
@@ -220,7 +221,7 @@ class _RollerDiceState extends State<RollerDice>
                   'Player 02 Score :- $player2Score',
                   style: const TextStyle(
                     fontSize: 18.0,
-                    color: Colors.white,
+                    color: kThemeColorWhite,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -239,7 +240,7 @@ class _RollerDiceState extends State<RollerDice>
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Radio(
-          activeColor: Colors.red,
+          activeColor: kThemeColorRed,
           value: 'MAX',
           groupValue: selectedOption,
           onChanged: (value) {
@@ -250,9 +251,9 @@ class _RollerDiceState extends State<RollerDice>
           },
         ),
         const Text('MAX ? ',
-            style: TextStyle(color: Colors.white, fontSize: 25)),
+            style: TextStyle(color: kThemeColorWhite, fontSize: 25)),
         Radio(
-          activeColor: Colors.red,
+          activeColor: kThemeColorRed,
           value: 'MIN',
           groupValue: selectedOption,
           onChanged: (value) {
@@ -263,7 +264,7 @@ class _RollerDiceState extends State<RollerDice>
           },
         ),
         const Text('MIN ?',
-            style: TextStyle(color: Colors.white, fontSize: 25)),
+            style: TextStyle(color: kThemeColorWhite, fontSize: 25)),
       ],
     );
   }
