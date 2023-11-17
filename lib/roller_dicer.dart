@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class RollerDice extends StatefulWidget {
   const RollerDice({Key? key}) : super(key: key);
@@ -24,43 +25,57 @@ class _RollerDiceState extends State<RollerDice>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 1),
+      duration: const Duration(seconds: 2),
     );
 
     _rotationAnimation = Tween<double>(begin: 10, end: 60).animate(_controller);
     _scaleAnimation = Tween<double>(begin: 1.0, end: 1.5).animate(_controller);
   }
 
-  int diceNum = 1;
+  final Random _random = Random();
+  int diceNum = 0;
+  // -----------------------------------ROLL-------------------------------------------------
   void roll() {
-    setState(() {
-      if (_rotationAnimation.isCompleted) {
-        diceNum = Random().nextInt(6) + 1;
-      }
-    });
-    if (selectedOption == "MAX") {
-      if (diceNum == 4 || diceNum == 5 || diceNum == 6) {
-        if (currentPlayer == 1) {
-          player1Score += 10;
-        } else {
-          player2Score += 10;
-        }
-      }
-      print('MAX');
-    } else {
-      if (diceNum == 1 || diceNum == 2 || diceNum == 3) {
-        if (currentPlayer == 1) {
-          player1Score += 10;
-        } else {
-          player2Score += 10;
-        }
-        print('MIN');
-      }
-    }
-
     _controller.reset();
     _controller.forward();
+    // ----------------------------------------That for 2 Players----------------------------
+    // if (currentPlayer == 1) {
+    //   SystemChrome.setPreferredOrientations([
+    //     DeviceOrientation.portraitUp,
+    //   ]);
+    // } else {
+    //   SystemChrome.setPreferredOrientations([
+    //     DeviceOrientation.portraitDown,
+    //   ]);
+    // }
 
+    setState(() {
+      diceNum = _random.nextInt(6) + 1;
+    });
+
+    if (selectedOption == 'MAX') {
+      if (diceNum == 4 || diceNum == 5 || diceNum == 6) {
+        print('MAX---$diceNum');
+        if (currentPlayer == 1) {
+          player1Score += 10;
+        } else {
+          player2Score += 10;
+        }
+      } else {
+        print('No Marks');
+      }
+    } else if (selectedOption == 'MIN') {
+      if (diceNum == 1 || diceNum == 2 || diceNum == 3) {
+        print('MIN---$diceNum');
+        if (currentPlayer == 1) {
+          player1Score += 10;
+        } else {
+          player2Score += 10;
+        }
+      } else {
+        print('No Marks');
+      }
+    }
     currentPlayer = (currentPlayer == 1) ? 2 : 1;
     if (currentRound == 5) {
       int winner = (player1Score > player2Score) ? 1 : 2;
@@ -160,7 +175,7 @@ class _RollerDiceState extends State<RollerDice>
 
   Widget getScoreCard() {
     return Card(
-      elevation: 4.0, // Adds a shadow to the card
+      elevation: 10.0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
