@@ -1,16 +1,63 @@
-# roller_dice
+# RollerDice Game
 
-A new Flutter project.
+A simple mobile game developed with Flutter that simulates rolling a pair of dice. Shake your device or tap the screen to roll the dice and see the result!
+
+## Screenshots
+
+Include screenshots or GIFs showcasing the gameplay and interface of your RollerDice game.
+
+![RollerDice Screenshot](screenshots/screenshot.png)
+
+## Features
+
+- Simulate rolling a pair of dice.
+- Realistic dice rolling animation.
+- Interactive gameplay - shake your device or tap the screen to roll the dice.
+- Fun and easy to play.
+
+## Technologies Used
+
+- Flutter
+- Dart
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+To get started with the RollerDice game on your local machine, follow these steps:
 
-A few resources to get you started if this is your first Flutter project:
+1. Clone the repository:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+    ```bash
+    https://github.com/sharada-marasinha/roller-dice-game.git
+    ```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+2. Open the project folder:
+
+    ```bash
+    cd rollerdice-game
+    ```
+
+3. Run the app:
+
+    ```bash
+    flutter run
+    ```
+
+## How to Play
+
+1. Launch the app on your mobile device.
+2. Shake your device or tap the screen to roll the dice.
+3. Enjoy the animated dice rolling and see the result!
+
+## Demo
+
+Check out the live demo [here](#) or download the app on the [Google Play Store](#) (if applicable).
+
+## Contributing
+
+If you'd like to contribute to the project, please follow the [contribution guidelines](CONTRIBUTING.md).
+
+## License
+
+This project is licensed under the [MIT License](LICENSE.md).
+
+
