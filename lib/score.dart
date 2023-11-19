@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:roller_dice/constants.dart';
 
 class ScoreDisplay extends StatefulWidget {
   const ScoreDisplay({super.key});
@@ -32,43 +33,90 @@ class _ScoreDisplayState extends State<ScoreDisplay>
     List<int> rounds = [1, 2, 3, 4, 5];
     List<int> player1score = [1, 2, 3, 4, 5];
     List<int> player2score = [1, 2, 3, 4, 5];
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  Text('Round'),
-                  for (int i = 1; i < rounds.length + 1; i++)
-                    Text('Round : $i'),
-                ],
+    return Padding(
+      padding: const EdgeInsets.only(top: 300),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    const Text(
+                      'Round\n',
+                      style: TextStyle(
+                        color: kThemeColorWhite,
+                        fontSize: 25.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    for (int i = 1; i < rounds.length + 1; i++)
+                      Text(
+                        'R : $i',
+                        style: const TextStyle(
+                          color: kThemeColorWhite,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  Text('Player 01'),
-                  for (var score in player1score) Text(score.toString())
-                ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    const Text(
+                      'Player 01\n',
+                      style: TextStyle(
+                        color: kThemeColorWhite,
+                        fontSize: 25.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    for (var score in player1score)
+                      Text(
+                        score.toString(),
+                        style: const TextStyle(
+                          color: kThemeColorWhite,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  Text('Player 02'),
-                  for (var score in player2score) Text(score.toString())
-                ],
-              ),
-            )
-          ],
-        ),
-      ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    const Text(
+                      'Player 02\n',
+                      style: TextStyle(
+                        color: kThemeColorWhite,
+                        fontSize: 25.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    for (var score in player2score)
+                      Text(
+                        score.toString(),
+                        style: const TextStyle(
+                          color: kThemeColorWhite,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
     );
   }
 

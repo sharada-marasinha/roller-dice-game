@@ -14,13 +14,13 @@ class GradientContainer extends StatelessWidget {
       decoration: const BoxDecoration(
           gradient: LinearGradient(
         colors: [
-          Color.fromARGB(255, 255, 255, 255),
-          Color.fromARGB(255, 0, 0, 0)
+          Color.fromARGB(255, 24, 23, 23),
+          Color.fromARGB(255, 39, 104, 33)
         ],
         begin: beginAlignment,
         end: endAlignment,
       )),
-      child: Center(child: const ScoreDisplay()),
+      child: const Center(child: NewGame()),
     );
   }
 }

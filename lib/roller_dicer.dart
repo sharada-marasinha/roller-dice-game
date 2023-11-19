@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:roller_dice/constants.dart';
+import 'package:roller_dice/score.dart';
 
 class RollerDice extends StatefulWidget {
   const RollerDice({Key? key}) : super(key: key);
@@ -20,6 +21,7 @@ class _RollerDiceState extends State<RollerDice>
   int player1Score = 0;
   int player2Score = 0;
   int currentRound = 1;
+  bool isGameOver = false;
 
   @override
   void initState() {
@@ -34,7 +36,7 @@ class _RollerDiceState extends State<RollerDice>
   }
 
   final Random _random = Random();
-  int diceNum = 0;
+  int diceNum = 1;
   // -----------------------------------ROLL-------------------------------------------------
   void roll() {
     _controller.reset();
@@ -78,31 +80,10 @@ class _RollerDiceState extends State<RollerDice>
       }
     }
     currentPlayer = (currentPlayer == 1) ? 2 : 1;
-    if (currentRound == 5) {
+    if (currentRound == 2) {
       int winner = (player1Score > player2Score) ? 1 : 2;
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Game Over !'),
-            content: Text('Player $winner wins!'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  resetGame();
-                },
-                child: Text('Play Again'),
-              ),
-              SizedBox(height: 20.0),
-              ElevatedButton(
-                onPressed: resetGame,
-                child: Text('Restart Game'),
-              ),
-            ],
-          );
-        },
-      );
+      print('Saman');
+      isGameOver = true;
     } else {
       currentRound++;
     }
@@ -118,19 +99,21 @@ class _RollerDiceState extends State<RollerDice>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        getScoreCard(),
-        const SizedBox(height: 50.0),
-        getDice(),
-        const SizedBox(height: 50.0),
-        getOptions(),
-        getButton(),
-        const SizedBox(height: 10.0),
-      ],
-    );
+    return isGameOver
+        ?const ScoreDisplay()
+        : Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              getScoreCard(),
+              const SizedBox(height: 50.0),
+              getDice(),
+              const SizedBox(height: 50.0),
+              getOptions(),
+              getButton(),
+              const SizedBox(height: 10.0),
+            ],
+          );
   }
 
   Widget getResetButton() {
